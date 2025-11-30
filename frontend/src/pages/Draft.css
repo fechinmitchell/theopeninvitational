@@ -1,0 +1,1035 @@
+/* =============================================
+   DRAFT PAGE - MOBILE FIRST DESIGN
+   ============================================= */
+
+   .draft-container {
+    min-height: 100vh;
+    padding: 90px 16px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+  }
+  
+  /* =============================================
+     LOADING STATE
+     ============================================= */
+  
+  .loading-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+    gap: 16px;
+  }
+  
+  .loading-state p {
+    color: var(--light-text);
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+  .loading-spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid rgba(0, 32, 91, 0.1);
+    border-top-color: var(--ryder-blue);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  /* =============================================
+     HEADER
+     ============================================= */
+  
+  .draft-header {
+    text-align: center;
+    margin-bottom: 24px;
+    animation: fadeInDown 0.6s ease-out;
+  }
+  
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .draft-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--dark-text);
+    margin-bottom: 4px;
+    letter-spacing: -0.5px;
+  }
+  
+  .draft-mode-label {
+    font-size: 16px;
+    color: var(--light-text);
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  
+  .draft-status {
+    background: white;
+    padding: 16px 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    display: inline-block;
+    margin-top: 12px;
+  }
+  
+  .current-pick {
+    font-size: 14px;
+    color: var(--light-text);
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+  
+  .current-team {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.3px;
+  }
+  
+  .current-team.team-a {
+    color: var(--ryder-blue);
+  }
+  
+  .current-team.team-b {
+    color: var(--ryder-red);
+  }
+  
+  .auto-drawing-text {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ryder-gold);
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+  
+  /* =============================================
+     DRAFT CONTENT
+     ============================================= */
+  
+  .draft-content {
+    animation: fadeIn 0.4s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  /* =============================================
+     TEAMS DISPLAY
+     ============================================= */
+  
+  .teams-display {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  
+  .team-column {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  }
+  
+  .team-a-column {
+    border-top: 5px solid var(--ryder-blue);
+  }
+  
+  .team-b-column {
+    border-top: 5px solid var(--ryder-red);
+  }
+  
+  .team-header {
+    padding: 16px 20px;
+    text-align: center;
+  }
+  
+  .team-a-header {
+    background: linear-gradient(135deg, rgba(0, 32, 91, 0.08) 0%, rgba(0, 32, 91, 0.02) 100%);
+  }
+  
+  .team-b-header {
+    background: linear-gradient(135deg, rgba(206, 17, 38, 0.08) 0%, rgba(206, 17, 38, 0.02) 100%);
+  }
+  
+  .team-header h3 {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 4px;
+    letter-spacing: -0.3px;
+  }
+  
+  .team-a-header h3 {
+    color: var(--ryder-blue);
+  }
+  
+  .team-b-header h3 {
+    color: var(--ryder-red);
+  }
+  
+  .captain-name {
+    font-size: 14px;
+    color: var(--light-text);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  
+  .team-count {
+    font-size: 13px;
+    color: var(--light-text);
+    font-weight: 500;
+  }
+  
+  .team-players {
+    padding: 12px;
+    min-height: 100px;
+  }
+  
+  .empty-team-draft {
+    text-align: center;
+    padding: 24px 16px;
+    color: var(--light-text);
+    font-style: italic;
+    font-size: 14px;
+  }
+  
+  /* =============================================
+     TEAM PLAYER CARDS
+     ============================================= */
+  
+  .team-player {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    margin-bottom: 8px;
+    animation: slideIn 0.4s ease-out;
+  }
+  
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  .team-a-player {
+    background: linear-gradient(135deg, rgba(0, 32, 91, 0.1) 0%, rgba(0, 32, 91, 0.04) 100%);
+    border-left: 4px solid var(--ryder-blue);
+  }
+  
+  .team-b-player {
+    background: linear-gradient(135deg, rgba(206, 17, 38, 0.1) 0%, rgba(206, 17, 38, 0.04) 100%);
+    border-left: 4px solid var(--ryder-red);
+  }
+  
+  .player-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    font-size: 13px;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+  
+  .team-a-player .player-number {
+    background: var(--ryder-blue);
+    color: white;
+  }
+  
+  .team-b-player .player-number {
+    background: var(--ryder-red);
+    color: white;
+  }
+  
+  .player-info-draft {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .player-name-draft {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--dark-text);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .player-handicap {
+    font-size: 12px;
+    color: var(--light-text);
+    font-weight: 600;
+    margin-top: 2px;
+  }
+  
+  .captain-badge-small {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    background: linear-gradient(135deg, var(--ryder-gold) 0%, #B8932E 100%);
+    color: white;
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: 800;
+    box-shadow: 0 2px 6px rgba(212, 165, 116, 0.4);
+  }
+  
+  /* =============================================
+     AVAILABLE PLAYERS
+     ============================================= */
+  
+  .available-players-section {
+    background: white;
+    border-radius: 20px;
+    padding: 20px 16px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  }
+  
+  .available-players-section h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--dark-text);
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  
+  .available-players-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  
+  .available-player-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 12px;
+    background: var(--soft-white);
+    border: 3px solid transparent;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+    min-width: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .available-player-btn:hover:not(.no-click):not(:disabled) {
+    border-color: var(--ryder-blue);
+    background: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 32, 91, 0.15);
+  }
+  
+  .available-player-btn:active:not(.no-click):not(:disabled) {
+    transform: scale(0.98);
+  }
+  
+  .available-player-btn:disabled {
+    cursor: default;
+  }
+  
+  .available-player-btn.no-click {
+    cursor: default;
+  }
+  
+  .available-player-btn.no-click:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: transparent;
+  }
+  
+  .available-player-btn.highlighted-player {
+    border-color: var(--ryder-gold);
+    background: linear-gradient(135deg, rgba(212, 165, 116, 0.2) 0%, rgba(212, 165, 116, 0.08) 100%);
+    transform: scale(1.05);
+    box-shadow: 0 8px 24px rgba(212, 165, 116, 0.4);
+    animation: highlightPulse 0.3s ease-out;
+  }
+  
+  @keyframes highlightPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+    100% { transform: scale(1.05); }
+  }
+  
+  .available-player-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--dark-text);
+    margin-bottom: 4px;
+    word-break: break-word;
+  }
+  
+  .available-player-handicap {
+    font-size: 12px;
+    color: var(--light-text);
+    font-weight: 600;
+  }
+  
+  /* =============================================
+     DRAFT COMPLETE SECTION
+     ============================================= */
+  
+  .draft-complete-section {
+    background: white;
+    border-radius: 24px;
+    padding: 32px 20px;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    animation: scaleIn 0.5s ease-out;
+  }
+  
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  .draft-complete-section h2 {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--dark-text);
+    margin-bottom: 8px;
+  }
+  
+  .draft-complete-section > p {
+    font-size: 16px;
+    color: var(--light-text);
+    margin-bottom: 24px;
+  }
+  
+  .team-summary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  
+  .summary-card {
+    background: var(--soft-white);
+    padding: 20px 32px;
+    border-radius: 16px;
+    text-align: center;
+    width: 100%;
+    max-width: 220px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  }
+  
+  .summary-card.summary-a {
+    border-top: 5px solid var(--ryder-blue);
+  }
+  
+  .summary-card.summary-b {
+    border-top: 5px solid var(--ryder-red);
+  }
+  
+  .summary-card h4 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--dark-text);
+  }
+  
+  .summary-card .team-size {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--dark-text);
+    margin-bottom: 4px;
+  }
+  
+  .summary-card .avg-handicap {
+    font-size: 13px;
+    color: var(--light-text);
+    font-weight: 600;
+  }
+  
+  .vs-badge {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--light-text);
+    padding: 10px 14px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+  
+  .finalize-btn {
+    padding: 18px 40px;
+    font-size: 17px;
+    background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
+    color: white;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    font-weight: 800;
+    box-shadow: 0 6px 24px rgba(76, 175, 80, 0.4);
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 320px;
+    letter-spacing: 0.3px;
+  }
+  
+  .finalize-btn:hover,
+  .finalize-btn:active {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 32px rgba(76, 175, 80, 0.5);
+  }
+  
+  /* =============================================
+     CONFETTI
+     ============================================= */
+  
+  .confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1000;
+  }
+  
+  .confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: -10px;
+    animation: confettiFall 4s linear forwards;
+  }
+  
+  @keyframes confettiFall {
+    0% {
+      transform: translateY(0) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh) rotate(720deg);
+      opacity: 0;
+    }
+  }
+  
+  .confetti:nth-child(odd) {
+    border-radius: 50%;
+  }
+  
+  .confetti:nth-child(even) {
+    border-radius: 2px;
+  }
+
+  /* =============================================
+     CAPTAIN SELECTION PHASE
+     ============================================= */
+
+  .captain-selection-section {
+    background: white;
+    border-radius: 24px;
+    padding: 32px 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    animation: scaleIn 0.5s ease-out;
+    overflow: visible;
+    height: auto;
+    min-height: auto;
+  }
+
+  .captain-selection-icon {
+    font-size: 56px;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .captain-selection-section h2 {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--dark-text);
+    margin-bottom: 8px;
+    letter-spacing: -0.3px;
+  }
+
+  .captain-selection-subtitle {
+    font-size: 14px;
+    color: var(--light-text);
+    margin-bottom: 24px;
+    line-height: 1.5;
+    padding: 0 8px;
+  }
+
+  .selected-captain-preview {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 20px;
+    background: linear-gradient(135deg, rgba(0, 32, 91, 0.1) 0%, rgba(0, 32, 91, 0.04) 100%);
+    border-radius: 14px;
+    margin-bottom: 24px;
+    border-left: 4px solid var(--ryder-blue);
+  }
+
+  .selected-captain-preview .selected-label {
+    font-size: 12px;
+    color: var(--light-text);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .selected-captain-preview .selected-name {
+    font-size: 16px;
+    color: var(--ryder-blue);
+    font-weight: 800;
+  }
+
+  .captain-selection-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 24px;
+    width: 100%;
+  }
+
+  .captain-option-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border: 2px solid rgba(0, 0, 0, 0.06);
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: left;
+    width: 100%;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .captain-option-btn:hover {
+    border-color: var(--ryder-gold);
+    background: linear-gradient(135deg, rgba(212, 165, 116, 0.15) 0%, rgba(212, 165, 116, 0.05) 100%);
+    transform: translateX(4px);
+    box-shadow: 0 4px 16px rgba(212, 165, 116, 0.25);
+  }
+
+  .captain-option-btn:active {
+    transform: scale(0.99);
+  }
+
+  .captain-option-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--dark-text);
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-right: 12px;
+  }
+
+  .captain-option-handicap {
+    font-size: 12px;
+    color: white;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--ryder-blue) 0%, #003080 100%);
+    padding: 6px 12px;
+    border-radius: 20px;
+    flex-shrink: 0;
+  }
+
+  .captain-option-btn:hover .captain-option-handicap {
+    background: linear-gradient(135deg, var(--ryder-gold) 0%, #B8932E 100%);
+    color: var(--dark-text);
+  }
+
+  .back-link-btn {
+    display: inline-block;
+    padding: 14px 24px;
+    background: transparent;
+    color: var(--light-text);
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .back-link-btn:hover {
+    color: var(--ryder-blue);
+    border-color: var(--ryder-blue);
+    background: rgba(0, 32, 91, 0.04);
+  }
+
+  /* Draft Mode Badge */
+  .draft-mode-badge {
+    display: inline-block;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, rgba(212, 165, 116, 0.2) 0%, rgba(212, 165, 116, 0.1) 100%);
+    color: #92400e;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 24px;
+    margin-bottom: 16px;
+    border: 2px solid rgba(212, 165, 116, 0.3);
+  }
+  
+  /* =============================================
+     ERROR MESSAGE
+     ============================================= */
+  
+  .error-message {
+    background: rgba(206, 17, 38, 0.1);
+    border: 2px solid rgba(206, 17, 38, 0.2);
+    color: var(--ryder-red);
+    padding: 14px 18px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  
+  /* =============================================
+     GLASS CARD (for error states)
+     ============================================= */
+  
+  .draft-content.glass-card {
+    background: white;
+    border-radius: 24px;
+    padding: 40px 24px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    max-width: 480px;
+    margin: 60px auto;
+  }
+  
+  .draft-content.glass-card h2 {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--dark-text);
+    margin-bottom: 16px;
+  }
+  
+  .draft-content.glass-card button {
+    margin-top: 8px;
+  }
+  
+  /* =============================================
+     TABLET STYLES (600px+)
+     ============================================= */
+  
+  @media (min-width: 600px) {
+    .draft-container {
+      padding: 100px 24px 40px;
+    }
+  
+    .draft-title {
+      font-size: 32px;
+    }
+  
+    .draft-mode-label {
+      font-size: 18px;
+    }
+  
+    .teams-display {
+      flex-direction: row;
+      gap: 20px;
+    }
+  
+    .team-column {
+      flex: 1;
+    }
+  
+    .team-header h3 {
+      font-size: 22px;
+    }
+  
+    .team-players {
+      padding: 16px;
+      min-height: 200px;
+    }
+  
+    .available-players-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+  
+    .available-player-btn {
+      padding: 18px 14px;
+    }
+  
+    .available-player-name {
+      font-size: 15px;
+    }
+  
+    .team-summary {
+      flex-direction: row;
+      justify-content: center;
+      gap: 20px;
+    }
+  
+    .summary-card {
+      width: auto;
+      min-width: 160px;
+    }
+  
+    .vs-badge {
+      font-size: 20px;
+      padding: 12px 16px;
+    }
+  
+    .finalize-btn {
+      width: auto;
+      padding: 18px 56px;
+    }
+
+    /* Captain Selection - Tablet */
+    .captain-selection-section {
+      padding: 40px 32px;
+    }
+
+    .captain-selection-section h2 {
+      font-size: 26px;
+    }
+
+    .captain-selection-icon {
+      font-size: 64px;
+    }
+
+    .captain-selection-grid {
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .captain-option-btn {
+      padding: 18px 24px;
+    }
+
+    .captain-option-name {
+      font-size: 17px;
+    }
+  }
+  
+  /* =============================================
+     DESKTOP STYLES (900px+)
+     ============================================= */
+  
+  @media (min-width: 900px) {
+    .draft-container {
+      padding: 110px 40px 60px;
+    }
+  
+    .draft-title {
+      font-size: 38px;
+    }
+  
+    .draft-mode-label {
+      font-size: 20px;
+    }
+  
+    .draft-status {
+      padding: 20px 32px;
+    }
+  
+    .current-team {
+      font-size: 24px;
+    }
+  
+    .teams-display {
+      gap: 28px;
+    }
+  
+    .team-column {
+      border-radius: 24px;
+    }
+  
+    .team-header {
+      padding: 20px 24px;
+    }
+  
+    .team-header h3 {
+      font-size: 24px;
+    }
+  
+    .team-players {
+      padding: 20px;
+      min-height: 300px;
+    }
+  
+    .team-player {
+      padding: 14px 18px;
+      border-radius: 14px;
+    }
+  
+    .player-name-draft {
+      font-size: 16px;
+    }
+  
+    .available-players-section {
+      padding: 28px 24px;
+      border-radius: 24px;
+    }
+  
+    .available-players-section h3 {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+  
+    .available-players-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+  
+    .available-player-btn {
+      padding: 20px 16px;
+      border-radius: 16px;
+    }
+  
+    .available-player-btn:hover:not(.no-click):not(:disabled) {
+      transform: translateY(-4px);
+    }
+  
+    .available-player-name {
+      font-size: 16px;
+    }
+  
+    .draft-complete-section {
+      padding: 48px 40px;
+      border-radius: 28px;
+    }
+  
+    .draft-complete-section h2 {
+      font-size: 36px;
+    }
+  
+    .summary-card {
+      padding: 24px 40px;
+      min-width: 180px;
+    }
+  
+    .summary-card .team-size {
+      font-size: 32px;
+    }
+  
+    .finalize-btn {
+      font-size: 18px;
+      padding: 20px 64px;
+    }
+
+    /* Captain Selection - Desktop */
+    .captain-selection-section {
+      padding: 48px 40px;
+      max-width: 650px;
+    }
+
+    .captain-selection-grid {
+      max-width: 550px;
+      gap: 12px;
+    }
+
+    .captain-option-btn {
+      padding: 20px 28px;
+      border-radius: 16px;
+    }
+
+    .captain-option-btn:hover {
+      transform: translateX(8px);
+    }
+
+    .captain-option-name {
+      font-size: 18px;
+    }
+
+    .captain-option-handicap {
+      padding: 8px 16px;
+      font-size: 13px;
+    }
+  }
+  
+  /* =============================================
+     LARGE DESKTOP STYLES (1200px+)
+     ============================================= */
+  
+  @media (min-width: 1200px) {
+    .available-players-grid {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
+  
+  /* =============================================
+     SAFE AREA (NOTCH) SUPPORT
+     ============================================= */
+  
+  @supports (padding-bottom: env(safe-area-inset-bottom)) {
+    .draft-container {
+      padding-bottom: calc(40px + env(safe-area-inset-bottom));
+    }
+  }
+  
+  /* =============================================
+     REDUCED MOTION
+     ============================================= */
+  
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    
+    .confetti {
+      display: none;
+    }
+  }
+  
+  /* =============================================
+     DARK MODE SUPPORT (optional)
+     ============================================= */
+  
+  @media (prefers-color-scheme: dark) {
+    /* Add dark mode styles here if needed */
+  }

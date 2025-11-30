@@ -1,0 +1,174 @@
+.checkin-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 20px 40px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8f5e9 100%);
+  }
+  
+  .checkin-content {
+    max-width: 480px;
+    width: 100%;
+    text-align: center;
+    animation: fadeInScale 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  @keyframes fadeInScale {
+    from {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  .checkin-loading {
+    padding: 40px 0;
+  }
+  
+  .loading-spinner {
+    width: 60px;
+    height: 60px;
+    border: 4px solid rgba(0, 32, 91, 0.1);
+    border-top-color: var(--ryder-blue);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 24px;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  .checkin-loading h2 {
+    font-size: 24px;
+    color: var(--dark-text);
+  }
+  
+  .checkin-success {
+    padding: 20px 0;
+  }
+  
+  .success-icon {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
+    color: white;
+    font-size: 48px;
+    font-weight: 700;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    animation: successPop 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 32px rgba(76, 175, 80, 0.4);
+  }
+  
+  @keyframes successPop {
+    0% {
+      transform: scale(0);
+      opacity: 0;
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  .checkin-success h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--dark-text);
+    margin-bottom: 12px;
+  }
+  
+  .success-message {
+    font-size: 18px;
+    color: var(--light-text);
+    margin-bottom: 32px;
+  }
+  
+  .redirect-notice {
+    padding-top: 24px;
+    border-top: 2px solid rgba(0, 0, 0, 0.06);
+  }
+  
+  .redirect-notice p {
+    font-size: 14px;
+    color: var(--light-text);
+    margin-bottom: 16px;
+  }
+  
+  .go-to-lobby-btn {
+    background: linear-gradient(135deg, var(--ryder-gold) 0%, #B8932E 100%);
+    color: var(--dark-text);
+    padding: 16px 32px;
+    font-size: 16px;
+    box-shadow: 0 4px 16px rgba(212, 165, 116, 0.4);
+  }
+  
+  .checkin-error {
+    padding: 20px 0;
+  }
+  
+  .error-icon {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, var(--ryder-red) 0%, #a00f24 100%);
+    color: white;
+    font-size: 48px;
+    font-weight: 700;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    box-shadow: 0 8px 32px rgba(206, 17, 38, 0.4);
+  }
+  
+  .checkin-error h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--dark-text);
+    margin-bottom: 12px;
+  }
+  
+  .error-message {
+    font-size: 16px;
+    color: var(--light-text);
+    margin-bottom: 32px;
+  }
+  
+  .error-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .error-actions button {
+    width: 100%;
+  }
+  
+  @media (max-width: 768px) {
+    .checkin-container {
+      padding: 120px 20px 40px;
+    }
+  
+    .checkin-success h2 {
+      font-size: 26px;
+    }
+  
+    .success-icon,
+    .error-icon {
+      width: 80px;
+      height: 80px;
+      font-size: 36px;
+    }
+  }

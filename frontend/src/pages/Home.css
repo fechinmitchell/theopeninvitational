@@ -1,0 +1,177 @@
+.home-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 20px 40px;
+    position: relative;
+  }
+  
+  .home-content {
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .home-title {
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 16px;
+    color: var(--dark-text);
+    letter-spacing: -1px;
+    line-height: 1.1;
+    animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.1s backwards;
+  }
+  
+  .home-subtitle {
+    font-size: 17px;
+    margin-bottom: 48px;
+    color: var(--light-text);
+    line-height: 1.6;
+    font-weight: 400;
+    animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s backwards;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .home-welcome {
+    animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s backwards;
+  }
+  
+  .home-welcome h2 {
+    font-size: 26px;
+    margin-bottom: 32px;
+    color: var(--dark-text);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+  
+  .home-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  .home-buttons button {
+    width: 100%;
+    max-width: 320px;
+    animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) backwards;
+  }
+  
+  .home-buttons button:nth-child(1) {
+    animation-delay: 0.4s;
+  }
+  
+  .home-buttons button:nth-child(2) {
+    animation-delay: 0.5s;
+  }
+  
+  .home-guest-section {
+    margin-top: 24px;
+    animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.6s backwards;
+  }
+  
+  .home-guest-section button {
+    width: 100%;
+    max-width: 320px;
+  }
+  
+  /* Ryder Cup Team Colors for Home Buttons */
+  .home-buttons button.team-usa {
+    background: linear-gradient(135deg, var(--ryder-red) 0%, #A00F24 100%);
+    color: white;
+    box-shadow: 
+      0 4px 16px rgba(206, 17, 38, 0.25),
+      0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .home-buttons button.team-usa:hover {
+    box-shadow: 
+      0 8px 24px rgba(206, 17, 38, 0.3),
+      0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Mobile - Already optimized! */
+  @media (max-width: 768px) {
+    .home-container {
+      padding: 120px 20px 40px;
+    }
+  
+    .home-title {
+      font-size: 32px;
+    }
+  
+    .home-subtitle {
+      font-size: 16px;
+      margin-bottom: 40px;
+    }
+  
+    .home-welcome h2 {
+      font-size: 24px;
+      margin-bottom: 28px;
+    }
+  }
+  
+  /* Tablet */
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .home-title {
+      font-size: 48px;
+    }
+  
+    .home-subtitle {
+      font-size: 18px;
+    }
+  
+    .home-welcome h2 {
+      font-size: 28px;
+    }
+  }
+  
+  /* Desktop */
+  @media (min-width: 1025px) {
+    .home-title {
+      font-size: 56px;
+    }
+  
+    .home-subtitle {
+      font-size: 19px;
+      margin-bottom: 56px;
+    }
+  
+    .home-welcome h2 {
+      font-size: 30px;
+      margin-bottom: 40px;
+    }
+  
+    .home-buttons {
+      flex-direction: row;
+      justify-content: center;
+      gap: 16px;
+    }
+  
+    .home-buttons button {
+      width: auto;
+      min-width: 200px;
+    }
+  
+    .home-guest-section button {
+      width: auto;
+      min-width: 240px;
+    }
+  }
