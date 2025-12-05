@@ -1,9 +1,20 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5006/api';
+// Auto-detect environment based on where the app is running
+const getBaseURL = () => {
+  const hostname = window.location.hostname;
+  
+  if (hostname === 'localhost' || hostname === '127.0.0.1') {
+    // Local development
+    return 'http://localhost:5006/api';
+  } else {
+    // Production (Render)
+    return 'https://theopeninvitational-backend.onrender.com/api';
+  }
+};
 
 const api = axios.create({
-  baseURL: API_URL,
+  baseURL: getBaseURL(),
 });
 
 // Add token to requests if it exists
