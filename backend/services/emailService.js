@@ -158,6 +158,57 @@ const getReminderEmailHtml = (playerName, tournamentName, tournamentDate, gameCo
 </html>
 `;
 
+// Password reset email template
+const getPasswordResetEmailHtml = (name, resetUrl) => `
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #1a1a1a; background-color: #f5f7fa;">
+    <div style="max-width: 600px; margin: 0 auto; padding: 40px 20px;">
+      <div style="background: white; border-radius: 20px; padding: 40px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+        
+        <div style="text-align: center; margin-bottom: 32px;">
+          <h2 style="font-size: 20px; font-weight: 700; color: #00205B; margin: 0;">The Open Invitational</h2>
+          <div style="height: 4px; background: linear-gradient(90deg, #00205B 0%, #D4A574 50%, #CE1126 100%); border-radius: 2px; margin: 16px auto; width: 100px;"></div>
+        </div>
+        
+        <div style="text-align: center; margin-bottom: 24px;">
+          <div style="width: 64px; height: 64px; background: linear-gradient(135deg, #00205B 0%, #003080 100%); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+            <span style="font-size: 28px;">🔐</span>
+          </div>
+        </div>
+        
+        <h1 style="font-size: 24px; color: #1a1a1a; margin: 0 0 16px 0; text-align: center;">Reset Your Password</h1>
+        
+        <p style="font-size: 16px; color: #666; margin: 0 0 24px 0; text-align: center;">
+          Hey ${name}, we received a request to reset your password.
+        </p>
+        
+        <div style="text-align: center; margin: 32px 0;">
+          <a href="${resetUrl}" style="display: inline-block; padding: 18px 48px; background: linear-gradient(135deg, #00205B 0%, #003080 100%); color: white; text-decoration: none; border-radius: 12px; font-weight: 700; font-size: 16px;">
+            Reset Password
+          </a>
+        </div>
+        
+        <p style="font-size: 14px; color: #999; text-align: center; margin: 24px 0 0 0;">
+          This link expires in <strong>1 hour</strong>. If you didn't request this, you can safely ignore this email.
+        </p>
+        
+        <div style="text-align: center; margin-top: 32px; padding-top: 24px; border-top: 1px solid #eee;">
+          <p style="color: #999; font-size: 12px; margin: 0;">
+            Can't click the button? Copy this link:<br>
+            <span style="color: #00205B; word-break: break-all;">${resetUrl}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+`;
+
 // Send player invite email
 export const sendPlayerInvite = async (player, game) => {
   const transporter = createTransporter();
@@ -266,6 +317,43 @@ Don't miss out! ⛳
   }
 };
 
+// Send password reset email
+export const sendPasswordResetEmail = async (email, name, resetToken) => {
+  const transporter = createTransporter();
+  const resetUrl = `${BASE_URL}/reset-password/${resetToken}`;
+  
+  if (!transporter) {
+    console.log(`📧 [DEV MODE] Would send password reset to ${email}`);
+    console.log(`   Reset URL: ${resetUrl}`);
+    return { success: true, devMode: true };
+  }
+
+  try {
+    await transporter.sendMail({
+      from: `"The Open Invitational" <${process.env.EMAIL_USER}>`,
+      to: email,
+      subject: '🔐 Reset Your Password - The Open Invitational',
+      html: getPasswordResetEmailHtml(name, resetUrl),
+      text: `Hey ${name},
+
+We received a request to reset your password for The Open Invitational.
+
+Reset your password here: ${resetUrl}
+
+This link expires in 1 hour.
+
+If you didn't request this, you can safely ignore this email.
+      `
+    });
+
+    console.log(`✅ Password reset email sent to ${email}`);
+    return { success: true };
+  } catch (error) {
+    console.error(`❌ Failed to send reset email to ${email}:`, error.message);
+    return { success: false, error: error.message };
+  }
+};
+
 // Send invite to all players in a game
 export const sendAllInvites = async (gameId, pool) => {
   try {
@@ -304,5 +392,6 @@ export default {
   generateCheckInUrl,
   sendPlayerInvite,
   sendReminderEmail,
+  sendPasswordResetEmail,
   sendAllInvites
 };

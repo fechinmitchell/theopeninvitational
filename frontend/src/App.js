@@ -4,6 +4,8 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 import CreateGame from './pages/CreateGame';
 import GameSetup from './pages/GameSetup';
 import Draft from './pages/Draft';
@@ -13,7 +15,7 @@ import Leaderboard from './pages/Leaderboard';
 import Join from './pages/Join';
 import Lobby from './pages/Lobby';
 import CheckIn from './pages/CheckIn';
-import MyGames from './pages/MyGames';  // ADD THIS IMPORT
+import MyGames from './pages/MyGames';
 import './App.css';
 
 function Navigation() {
@@ -55,9 +57,11 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password/:token" element={<ResetPassword />} />
             <Route path="/create-game" element={<CreateGame />} />
             <Route path="/join" element={<Join />} />
-            <Route path="/my-games" element={<MyGames />} />  {/* ADD THIS ROUTE */}
+            <Route path="/my-games" element={<MyGames />} />
             <Route path="/tournament/:code" element={<Lobby />} />
             <Route path="/checkin/:token" element={<CheckIn />} />
             <Route path="/game/:gameId/setup" element={<GameSetup />} />
