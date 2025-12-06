@@ -1,21 +1,38 @@
-import express from 'express';
-import { 
-  register, 
-  login, 
-  forgotPassword, 
-  resetPassword, 
-  verifyResetToken 
-} from '../controllers/authController.js';
+import jwt from 'jsonwebtoken';
 
-const router = express.Router();
+export const authenticateToken = (req, res, next) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
 
-// Existing routes
-router.post('/register', register);
-router.post('/login', login);
+  if (!token) {
+    return res.status(401).json({ error: 'Access token required' });
+  }
 
-// Password reset routes
-router.post('/forgot-password', forgotPassword);
-router.post('/reset-password', resetPassword);
-router.get('/verify-reset-token/:token', verifyResetToken);
+  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    if (err) {
+      return res.status(403).json({ error: 'Invalid or expired token' });
+    }
+    req.user = user;
+    next();
+  });
+};
 
-export default router;
+// Optional authentication - doesn't require token but attaches user if present
+export const optionalAuth = (req, res, next) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (!token) {
+    req.user = null;
+    return next();
+  }
+
+  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    if (err) {
+      req.user = null;
+    } else {
+      req.user = user;
+    }
+    next();
+  });
+};
