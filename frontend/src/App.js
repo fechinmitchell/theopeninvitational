@@ -1,5 +1,6 @@
+// frontend/src/App.js
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, Navigate, useLocation } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -18,6 +19,20 @@ import CheckIn from './pages/CheckIn';
 import MyGames from './pages/MyGames';
 import './App.css';
 
+// Redirects logged out users to /login, then back to where they were going
+function ProtectedRoute({ children }) {
+  const { isAuthenticated, loading } = useAuth();
+  const location = useLocation();
+
+  if (loading) return null;
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace state={{ from: location.pathname }} />;
+  }
+
+  return children;
+}
+
 function Navigation() {
   const { isAuthenticated, user, logout } = useAuth();
 
@@ -32,8 +47,9 @@ function Navigation() {
         <Link to="/join">Join Game</Link>
         {isAuthenticated ? (
           <>
+            <Link to="/my-games">My Games</Link>
             <Link to="/create-game">Create Game</Link>
-            <span className="nav-user-info">Hello, {user.name}</span>
+            {user?.name && <span className="nav-user-info">Hello, {user.name}</span>}
             <button onClick={logout}>Logout</button>
           </>
         ) : (
@@ -59,9 +75,9 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password/:token" element={<ResetPassword />} />
-            <Route path="/create-game" element={<CreateGame />} />
+            <Route path="/create-game" element={<ProtectedRoute><CreateGame /></ProtectedRoute>} />
+            <Route path="/my-games" element={<ProtectedRoute><MyGames /></ProtectedRoute>} />
             <Route path="/join" element={<Join />} />
-            <Route path="/my-games" element={<MyGames />} />
             <Route path="/tournament/:code" element={<Lobby />} />
             <Route path="/checkin/:token" element={<CheckIn />} />
             <Route path="/game/:gameId/setup" element={<GameSetup />} />
@@ -69,6 +85,7 @@ function App() {
             <Route path="/game/:gameId/matches" element={<MatchSetup />} />
             <Route path="/game/:gameId/leaderboard" element={<Leaderboard />} />
             <Route path="/match/:matchId/score" element={<LiveScore />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </div>
       </AuthProvider>

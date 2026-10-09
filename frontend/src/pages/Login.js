@@ -1,5 +1,6 @@
+// frontend/src/pages/Login.js
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import './Login.css';
 
@@ -8,9 +9,16 @@ function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  
+
   const navigate = useNavigate();
+  const location = useLocation();
   const { login } = useAuth();
+
+  // Where to go after login (set by ProtectedRoute or the session expiry redirect)
+  const params = new URLSearchParams(location.search);
+  const redirectTo = location.state?.from || params.get('from') || '/';
+
+  const sessionExpired = params.get('expired') === '1';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,21 +26,26 @@ function Login() {
     setLoading(true);
 
     const result = await login(email, password);
-    
+
     if (result.success) {
-      navigate('/');
+      navigate(redirectTo, { replace: true });
     } else {
       setError(result.error);
+      setLoading(false);
     }
-    
-    setLoading(false);
   };
 
   return (
     <div className="login-container">
       <div className="login-content glass-card">
         <h2 className="login-title">Welcome Back</h2>
-        
+
+        {sessionExpired && !error && (
+          <div className="error-message">
+            Your session expired. Please log in again.
+          </div>
+        )}
+
         {error && (
           <div className="error-message">
             {error}
